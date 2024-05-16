@@ -17,7 +17,7 @@ struct TabPage: View {
     @State var posted : [Postss]
        
     var body: some View {
-        
+        //This is what creates the little bar at the bottom with the images, the bottom the tag numbers are in orderto make sure the pages dont want to stack on top whne you are already on that page and click it again
         TabView(selection: $selectedTab){
             home(name: name, lastName: lastName, Username: Username, maleFemale: maleFemale, posted : posted)
                 .tabItem {
@@ -40,6 +40,7 @@ struct TabPage: View {
             
         }
         .onAppear() {
+            //makes the background of the bar white
                UITabBar.appearance().backgroundColor = .white
            }
         

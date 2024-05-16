@@ -7,33 +7,27 @@
 
 import SwiftUI
 struct AccCreate: View {
+    //variables where the info the user inputs will bhe stored
     @State var input : String = ""
     @State var name : String = ""
     @State var lastName : String = ""
     @State var Username : String = ""
     @State var password : String = ""
     @State var maleFemale : Bool = true
-    struct Students {
-        var username: String
-        var password: String
-       
-    }
-    @State private var posted : [Postss] = [
-        Postss(MaleFem: true, Userr: "NubiaStone", Text: "Today is so sunny and cute 😊🌞"),
-        Postss(MaleFem: false, Userr: "JohnButterfly", Text: "Going to the beach #summer"),
-        Postss(MaleFem: true, Userr: "KatieSmith", Text: "Happy Mothers Day to all Mothers")
-    ]
+//acess to the array that holds fake and real posts made
+    @State var posted : [Postss]
     var body: some View {
         NavigationView{
-            ZStack{
+            ZStack{ //background
                 Image("beige")
                 
-                VStack {
+                VStack { // plain grey icon no gender had been selected
                     Image("UserIcon")
                         .resizable()
                         .frame(width: 150, height: 150)
                         .cornerRadius(105)
-                    HStack{
+                    //hStack for the text and input to be side by side, same oes for all the hstacks in this page
+                    HStack{ // input to enter name
                         Text("Name:")
                             .bold()
                         TextField("Ex.John...", text: $name)
@@ -43,7 +37,7 @@ struct AccCreate: View {
                             .font(.system(size: 13))
                     }
                     .padding()
-                    HStack{
+                    HStack{ //input for lastname
                         Text("LastName:")
                             .bold()
                         TextField("Ex.Smith...", text: $lastName)
@@ -53,7 +47,7 @@ struct AccCreate: View {
                             .font(.system(size: 13))
                     }
                     .padding()
-                    HStack{
+                    HStack{  //input for username
                         Text("Username:")
                             .bold()
                         TextField("Ex.Abc123@...", text: $Username)
@@ -63,17 +57,17 @@ struct AccCreate: View {
                             .font(.system(size: 13))
                     }
                     .padding()
-                    HStack{
+                    HStack{// input for password
                         Text("Password:")
                             .bold()
-                        TextField("Ex.18...", text: $password)
+                        TextField("Ex.dkjfnjhdb...", text: $password)
                             .frame(width:180, height:30)
                             .background(Color.white)
                             .cornerRadius(10)
                             .font(.system(size: 13))
                     }
                     .padding()
-                    HStack{
+                    HStack{ //determines if the male fem var is true or false if female then true if male them false
                         Text("Gender:")
                             .bold()
                         Button(action:{maleFemale = true} , label: {
@@ -96,21 +90,20 @@ struct AccCreate: View {
                        
                     }
                     Spacer()
-                    HStack{
+                    HStack{ // if all the fields are filled then you can create the acc and can hit nag=vlink to open app
                         if name != "" && lastName != "" && Username != "" && password != "" {
-                            NavigationLink(destination: Account(name: name, lastName: lastName, Username: Username, maleFemale: maleFemale, posted: posted).navigationBarBackButtonHidden(true), label:  {
+                            NavigationLink(destination: TabPage(name: name, lastName: lastName, Username: Username, maleFemale: maleFemale, posted: posted).navigationBarBackButtonHidden(true), label:  {
                                 Text("Create")
                                     .frame(width:120 , height:30)
                                     .foregroundStyle(Color.black)
-                                
                                     .background(Color.white)
                                     .font(.system(size: 15))
                                     .cornerRadius(10)
                                 
                                 
                             })
-                        }
-                        NavigationLink(destination: ContentView(posted: posted).navigationBarBackButtonHidden(true), label:  {
+                        }// if create was accidently selected this will be able to cancel adn send you back to the start page
+                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), label:  {
                                                         Text("Cancel")
                                                             .frame(width:120 , height:30)
                                                             .foregroundStyle(Color.black)
@@ -123,7 +116,7 @@ struct AccCreate: View {
                                                     })
                     }
                     .padding()
-                }
+                }//title
                 .navigationTitle("Create your profile")
                 .padding(.bottom)
                 .frame(width:400, height:400)
@@ -142,5 +135,5 @@ struct AccCreate: View {
 
 
 #Preview {
-    AccCreate()
+    AccCreate(posted: [])
 }
